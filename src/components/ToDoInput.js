@@ -2,9 +2,16 @@ import React, { Component } from 'react'
 
 export default class ToDoInput extends Component {
     render() {
+        const { value , handleSubmit, handleChange} = this.props;
         return (
             <div>
-                TODOINOUT
+                <form className = "form" onSubmit = {handleSubmit}>
+                    <div className = "form-group">
+                        <label htmlFor = "todoInput"><h3>Input ToDo</h3></label>
+                        <input onChange = {handleChange}  className = "form-control" id = "todoInput" name = "todoInput" type = "text" placeholder = "Enter the Name" value = {value}></input>
+                    </div>
+                    <button className = "btn btn-primary" type = "submit">Add New To-Do</button>
+                </form>
             </div>
         )
     }
