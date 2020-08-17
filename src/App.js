@@ -19,7 +19,15 @@ export default class App extends Component {
     event.preventDefault();
     if(this.state.edit === true){
       this.setState({
-        
+        items: this.state.items.filter((item) => {
+          if(item.id === this.state.id){
+            item.text = this.state.item
+          }
+          return true
+        }),
+        item: "",
+        id: uuidv4(),
+        edit: false
       })
     }
     else{
@@ -41,7 +49,8 @@ export default class App extends Component {
     const itemToBeEdited = this.state.items.find((item) => {return item.id === id})
     this.setState({
       item : itemToBeEdited.text,
-      edit: true
+      edit: true,
+      id: id
     })
   }
   handleDelete = (id) => {
