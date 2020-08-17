@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import uuid from 'uuid'
 import ToDoInput from "./components/ToDoInput"
-import TooDoList from "./components/TodoList"
 import ToDoItem from "./components/ToDoItem"
 import TodoList from './components/TodoList'
-
+//some comment
 export default class App extends Component {
   render() {
     return (
