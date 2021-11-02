@@ -1,4 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is simple To-Do app created with React. Link: https://to-do-list-alisherkarim.vercel.app/
+If you want this project to be updated, or if you have an interest to contribute write me ;)
+
+
+If you want to contribute or try it on your local machine:
+
+[Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
