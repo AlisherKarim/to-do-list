@@ -13,11 +13,10 @@ export default function App() {
     
     const localItems = localStorage.getItem("localItems");
     const jsonized = JSON.parse(localItems)
-    return jsonized || []
-    // [
-    // {id: uuidv4(), text: "wake up"},
-    // {id: uuidv4(), text: "do exercise"}
-    // ]
+    return jsonized || [
+      {id: uuidv4(), text: "wake up"},
+      {id: uuidv4(), text: "do exercise"}
+    ]
     }
   )
   const [item, setItem] = useState("");
