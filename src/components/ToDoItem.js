@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 
 function dateToYMD(date) {
-    var strArray=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    // var strArray=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var d = date.getDate();
-    var m = strArray[date.getMonth()];
-    var h = date.getHours();
-    var min = date.getMinutes();
-    return '' + (d <= 9 ? '0' + d : d) + ' ' + m + "  " + h + ":" + min;
+    var m = date.toLocaleString("en-US", { month: "short" });
+    var h = date.toLocaleString("en-US", { hour: "2-digit", minute: "2-digit" });;
+    return '' + (d <= 9 ? '0' + d : d) + ' ' + m + "  " + h;
 }
 
 
