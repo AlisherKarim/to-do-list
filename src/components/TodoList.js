@@ -7,11 +7,23 @@ export default class TodoList extends Component {
         //console.log(items);
         return (
             <section style = {{margin: "4rem 0 0 0"}}>
-                <h3>Your List:</h3>
-                <ul className = "list-group">
-                    {items.map((item) => <li className = "list-group-item" key = {item.id}><Item handleDelete = {handleDelete} handleEdit = {handleEdit} itemName = {item.text} itemId = {item.id}/></li>)}
-                </ul>
-                <button className = "btn btn-primary" onClick = {handleClear}>Clear All</button>
+                <h3 className='mx-2'>Your List:</h3>
+                <div className='table-responsive'>
+                    <table className = "table">
+                        <thead >
+                            <tr>
+                                <th scope="col-1">#</th>
+                                <th scope="col-2">Deadline</th>
+                                <th scope="col-4">Todo</th>
+                                <th scope="col-1"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {items.map((item, index) => <Item key={item.id} index={index} handleDelete = {handleDelete} handleEdit = {handleEdit} itemName = {item.text} itemId = {item.id} date = {item.date}/>)}
+                        </tbody>
+                    </table>
+                </div>
+                <button className = "btn btn-primary mt-3" onClick = {handleClear}>Clear All</button>
             </section>
         )
     }

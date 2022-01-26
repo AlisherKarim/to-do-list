@@ -14,13 +14,14 @@ export default function App() {
     const localItems = localStorage.getItem("localItems");
     const jsonized = JSON.parse(localItems)
     return jsonized || [
-      {id: uuidv4(), text: "wake up"},
-      {id: uuidv4(), text: "do exercise"}
+      {id: uuidv4(), text: "wake up", date: new Date()},
+      {id: uuidv4(), text: "do exercise", date: new Date()}
     ]
     }
   )
   const [item, setItem] = useState("");
   const [edit, setEdit] = useState(false);
+  const [date, setDate] = useState(new Date());
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,21 +29,34 @@ export default function App() {
 
       setItems(items.filter((CurrentItem) => {
         if(CurrentItem.id === id){
-          CurrentItem.text = item
+          CurrentItem.text = item;
+          CurrentItem.date = date;
         }
         return true;
       }
-      )
+      ).sort(function (a, b) {
+        // var dateA = new Date(a.date_prop).getTime();
+        // var dateB = new Date(b.date_prop).getTime();
+        // return dateA < dateB ? 1 : -1; // ? -1 : 1 for ascending/increasing order
+        return Date.parse(a.date) - Date.parse(b.date)
+      })
       )
       setItem("");
+      setDate(new Date());
       setID(uuidv4());
       setEdit(false);
     }
     else{
-      const newItem = {id: id, text: item}
+      const newItem = {id: id, text: item, date: date}
 
-      setItems([...items, newItem])
+      setItems([...items, newItem].sort(function (a, b) {
+        // var dateA = new Date(a.date_prop).getTime();
+        // var dateB = new Date(b.date_prop).getTime();
+        // return dateA < dateB ? 1 : -1; // ? -1 : 1 for ascending/increasing order
+        return Date.parse(a.date) - Date.parse(b.date)
+      }))
       setItem("")
+      setDate(new Date());
       setID(uuidv4())
     }
   }
@@ -53,6 +67,7 @@ export default function App() {
     console.log(`Editing ${idOfEditable}`);
     const itemToBeEdited = items.find((CurrentItem) => {return CurrentItem.id === idOfEditable})
     setItem(itemToBeEdited.text);
+    setDate(itemToBeEdited.date);
     setID(idOfEditable)
     setEdit(true)
   }
@@ -62,6 +77,9 @@ export default function App() {
   }
   const handleChange = (event) => {
     setItem(event.target.value);
+  }
+  const dateChangeHandler = (date) => {
+    setDate(date);
   }
 
   useEffect(() => {
@@ -73,9 +91,9 @@ export default function App() {
     <div>
       <div className = "container">
         <div className = "row">
-          <div className = "col-10 mx-auto col-md-8 mt-5"> 
+          <div className = "col mx-auto col-md-9 mt-5"> 
             <h2 className = "text-capitalize text-center">Your to-do list by <a class="text-lowercase" href = "https://github.com/alisherkarim">@alisherkarim</a></h2>
-            <ToDoInput handleSubmit = {handleSubmit} value = {item} handleChange = {handleChange}/>
+            <ToDoInput dateChangeHandler={dateChangeHandler} handleSubmit = {handleSubmit} value = {item} dateValue = {date} handleChange = {handleChange}/>
             <TodoList items = {items} handleClear = {handleClear} handleDelete = {handleDelete} handleEdit = {handleEdit}/>
           </div>
         </div>
